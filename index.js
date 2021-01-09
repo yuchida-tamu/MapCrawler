@@ -3,13 +3,28 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
 
+/*
+ * MongoDB
+ */
+const mongoose = require("mongoose");
+mongoose.connect(process.env.MONGODB_KEY, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+db.on("open", () => {
+  console.log("DB connected!!!");
+});
+
 /*testing commandline input DeleteLate*/
 
 /**************** */
 
 /*
-Google Map Client
-*/
+ *Google Map Client
+ */
 const {
   Client,
   PlaceInputType,
@@ -22,10 +37,10 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 /*
-SEARCH Service API
-Search places with keyword strings
-Returns a list of GoogleMap location objects
-*/
+ *SEARCH Service API
+ *Search places with keyword strings
+ *Returns a list of GoogleMap location objects
+ */
 app.route("/api/v1/search").get((req, res) => {
   res.send("Search places...");
 });
@@ -61,6 +76,12 @@ app.route("/api/v1/search/:keywords").get((req, res) => {
       res.send({ status: "FAIL", error: err });
     });
 });
+
+/*
+ *Save place list Service API
+ *Save a list of place objects to DB
+ */
+app.route("/api/v1/savelist").post((req, res) => {});
 
 app.listen(3000, () => {
   console.log("Server is running...");
