@@ -1,5 +1,5 @@
 {
-  "name": "mapcrawler",
+  "name": "geocode-generator",
   "version": "1.0.0",
   "description": "an application to transcode gmap info to json",
   "main": "index.js",
@@ -7,5 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "yuta uchida",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.1.14",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  }
 }
