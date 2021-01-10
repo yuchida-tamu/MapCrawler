@@ -12,9 +12,9 @@ What you can do
    [x] function to delete list
 3. [x]Produce json file of the list
 4. Refactor
-   []Savelist
-   []Search
-   []Export
+   [x]Savelist
+   [x]Search
+   [x]Export
 5. Frontend
    []init
    []Form
