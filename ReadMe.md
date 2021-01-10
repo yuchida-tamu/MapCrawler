@@ -7,7 +7,18 @@ What you can do
    b)returns places
 2. Add places to a list
    [x] function to save documents(list) to DB (New list)
-   [] input validation
+   [x] input validation
    [x] function to update list
    [x] function to delete list
-3. Produce json file of the list
+3. [x]Produce json file of the list
+4. Refactor
+   []Savelist
+   []Search
+   []Export
+5. Frontend
+   []init
+   []Form
+   []Map Display (changes on real time)
+   []Index of lists
+   []Download json
+   []auth
