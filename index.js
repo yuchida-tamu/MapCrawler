@@ -1,4 +1,5 @@
 require("dotenv").config();
+const fs = require("fs");
 const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
@@ -112,7 +113,7 @@ app.route("/api/v1/search/:keywords").get((req, res) => {
  */
 app.route("/api/v1/list/new").post(async (req, res) => {
   /* input validation */
-  const { isValid, msg } = validateInputs(req);
+  const { isValid, msg } = validateInputs(req, true);
   if (!isValid) return res.status(400).json({ status: "FAIL", msg: msg });
 
   const { body } = req;
@@ -151,7 +152,7 @@ app
   .route("/api/v1/list/:id")
   .put(async (req, res) => {
     /* input validation */
-    const { isValid, msg } = validateInputs(req);
+    const { isValid, msg } = validateInputs(req, false);
     if (!isValid) return res.status(400).json({ status: "FAIL", msg: msg });
 
     const { id } = req.params;
@@ -208,13 +209,13 @@ app
     }
   });
 
-const validateInputs = (req) => {
+const validateInputs = (req, isNew) => {
   const { id } = req.params;
   const { body } = req;
   let result = { isValid: true, msg: "Successfully validated" };
 
   /* Validate the param, :id, is valid ObjectId for MongoDB */
-  if (!mongoose.Types.ObjectId.isValid(id))
+  if (!isNew && !mongoose.Types.ObjectId.isValid(id))
     result = { isValid: false, msg: "Invalid Id" };
 
   body.forEach((place) => {
@@ -236,8 +237,11 @@ const validateInputs = (req) => {
       return;
     }
     /* Validate location.lat & location.lng are valid values (Number) */
-    if (place.hasOwnProperty("lat") && place.hasOwnProperty("lng")) {
-      const { lat, lng } = place.loaction;
+    if (
+      place.location.hasOwnProperty("lat") &&
+      place.location.hasOwnProperty("lng")
+    ) {
+      const { lat, lng } = place.location;
       if (isNaN(lat)) {
         result = {
           isValid: false,
@@ -263,6 +267,27 @@ const validateInputs = (req) => {
 
   return result;
 };
+
+/*
+ * Exporting JSON file Service API
+ */
+app.route("/api/v1/list/:id/export").get(async (req, res) => {
+  const { id } = req.params;
+  /* fetch the list */
+  const placeListObj = await PlaceList.findById(id);
+  const listJSON = JSON.stringify(placeListObj.list);
+  fs.writeFile(`./store/${id}.json`, listJSON, (err) => {
+    if (err) {
+      res
+        .status(500)
+        .json({ status: "FAIL", msg: "Failed to export a json file" });
+    } else {
+      res
+        .status(200)
+        .json({ status: "SUCCESS", msg: "Exported a file successfully" });
+    }
+  });
+});
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(
