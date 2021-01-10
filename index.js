@@ -92,10 +92,10 @@ app.route("/api/v1/search/:keywords").get((req, res) => {
         name: place.name,
         place_id: place.place_id,
       }));
-      res.send({ status: "SUCCESS", data: data });
+      res.status(200).json({ status: "SUCCESS", data: data });
     })
     .catch((err) => {
-      res.send({ status: "FAIL", error: err });
+      res.status(200).json({ status: "FAIL", error: err });
     });
 });
 
@@ -111,6 +111,10 @@ app.route("/api/v1/search/:keywords").get((req, res) => {
  * }
  */
 app.route("/api/v1/list/new").post(async (req, res) => {
+  /* input validation */
+  const { isValid, msg } = validateInputs(req);
+  if (!isValid) return res.status(400).json({ status: "FAIL", msg: msg });
+
   const { body } = req;
   const list = body.map(
     (place) =>
@@ -127,13 +131,13 @@ app.route("/api/v1/list/new").post(async (req, res) => {
       list: list,
     }).save();
 
-    res.send({
+    res.status(200).json({
       status: "SUCCESS",
       list: placeList,
       msg: "Successfully created a new list",
     });
   } catch (err) {
-    res.send({
+    res.status(500).json({
       status: "FAIL",
       msg: "Failed to create a new list",
       list: [],
@@ -142,9 +146,14 @@ app.route("/api/v1/list/new").post(async (req, res) => {
   }
 });
 /* Update the existing list */
+
 app
   .route("/api/v1/list/:id")
   .put(async (req, res) => {
+    /* input validation */
+    const { isValid, msg } = validateInputs(req);
+    if (!isValid) return res.status(400).json({ status: "FAIL", msg: msg });
+
     const { id } = req.params;
     const { body } = req;
     const updatedList = body.map(
@@ -166,13 +175,13 @@ app
         { list: updatedList },
         options
       ).exec();
-      res.send({
+      return res.status(200).json({
         status: "SUCCESS",
         list: updated,
         msg: "Successsfully updated the list",
       });
     } catch (err) {
-      res.send({
+      return res.status(500).json({
         status: "FAIL",
         list: [],
         msg: "Failed to update the list",
@@ -184,13 +193,13 @@ app
     const { id } = req.params;
     try {
       const removed = await PlaceList.findByIdAndRemove(id).exec();
-      res.send({
+      return res.status(200).json({
         status: "SUCCESS",
         removed: removed,
         msg: `Successfully removed: ${id}`,
       });
     } catch (err) {
-      res.send({
+      return res.status(500).json({
         status: "FAIL",
         removed: [],
         msg: `Failed to remove: ${id}`,
@@ -199,6 +208,65 @@ app
     }
   });
 
+const validateInputs = (req) => {
+  const { id } = req.params;
+  const { body } = req;
+  let result = { isValid: true, msg: "Successfully validated" };
+
+  /* Validate the param, :id, is valid ObjectId for MongoDB */
+  if (!mongoose.Types.ObjectId.isValid(id))
+    result = { isValid: false, msg: "Invalid Id" };
+
+  body.forEach((place) => {
+    /* Validate necessary inputs are included */
+    if (!place.place_id) {
+      result = {
+        isValid: false,
+        msg: "Invalid inputs. place_id is missing",
+      };
+      return;
+    }
+
+    //location
+    if (!("location" in place)) {
+      result = {
+        isValid: false,
+        msg: "Invalid inputs. location is missing",
+      };
+      return;
+    }
+    /* Validate location.lat & location.lng are valid values (Number) */
+    if (place.hasOwnProperty("lat") && place.hasOwnProperty("lng")) {
+      const { lat, lng } = place.loaction;
+      if (isNaN(lat)) {
+        result = {
+          isValid: false,
+          msg: "Invalid inputs. lat has to be a number",
+        };
+        return;
+      }
+      if (isNaN(lng)) {
+        result = {
+          isValid: false,
+          msg: "Invalid inputs. lng has to be a number",
+        };
+        return;
+      }
+    } else {
+      result = {
+        isValid: false,
+        msg: "Invalid inputs. location.lat or location.lng is missing",
+      };
+      return;
+    }
+  });
+
+  return result;
+};
+
 app.listen(process.env.PORT || 3000, () => {
-  console.log("Server is running...");
+  console.log(
+    "Server is running...",
+    process.env.PORT ? process.env.PORT : 3000
+  );
 });

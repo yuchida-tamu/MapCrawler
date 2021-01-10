@@ -6,7 +6,8 @@ What you can do
    a)Search with String(keywords)
    b)returns places
 2. Add places to a list
-   [] function to save documents(list) to DB (New list)
+   [x] function to save documents(list) to DB (New list)
    [] input validation
-   [] function to update list
+   [x] function to update list
+   [x] function to delete list
 3. Produce json file of the list
