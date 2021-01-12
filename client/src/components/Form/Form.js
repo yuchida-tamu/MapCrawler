@@ -2,7 +2,9 @@ import React from "react";
 
 const Form = (props) => {
   return (
-    <input type="text" name="search" placeholder="search by keywords..." />
+    <form onSubmit={props.click}>
+      <input type="text" name="search" placeholder="search by keywords..." />
+    </form>
   );
 };
 

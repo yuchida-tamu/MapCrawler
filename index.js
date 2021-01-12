@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
@@ -35,6 +35,12 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
+
+/*
+ *CORS (enable all cors request)
+ */
+app.use(cors());
+
 /*
  * SEARCH Service API
  * Search places with keyword strings
@@ -63,9 +69,9 @@ app.use("/api/v1/search", searchApi);
 const listApi = require("./apis/list");
 app.use("/api/v1/list", listApi);
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 3030, () => {
   console.log(
     "Server is running...",
-    process.env.PORT ? process.env.PORT : 3000
+    process.env.PORT ? process.env.PORT : 3030
   );
 });
