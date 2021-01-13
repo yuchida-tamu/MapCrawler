@@ -10,7 +10,6 @@ const PlaceFinder = () => {
   const onSubmitHandler = (event) => {
     event.preventDefault();
     fetchPlaces(event.target[0].value);
-    console.log(places);
   };
 
   const fetchPlaces = (keywords) => {
@@ -28,6 +27,7 @@ const PlaceFinder = () => {
   return (
     <div>
       <h2>PlaceFinder</h2>
+
       <Form click={onSubmitHandler} />
       <List places={places} />
       <Map places={places} />
