@@ -7,7 +7,6 @@ const Item = (props) => {
         <h4>{props.name}</h4>
         <p>{props.address}</p>
       </div>
-      }
     </li>
   );
 };

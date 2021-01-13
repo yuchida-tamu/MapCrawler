@@ -16,9 +16,13 @@ What you can do
    [x]Search
    [x]Export
 5. Frontend
-   []init
-   []Form
-   []Map Display (changes on real time)
+   [x]init
+   [x]Form
+   [x]Map Display (changes on real time)
+   []Marker Component - icons...
+   [] List of places - cards
    []Index of lists
    []Download json
    []auth
+6. Backend
+   []figure out a way to return multiple possible places by keywords
