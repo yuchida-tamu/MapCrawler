@@ -16,24 +16,19 @@ router.route("/").get((req, res) => {
  */
 router.route("/:keywords").get((req, res) => {
   const { keywords } = req.params;
+  console.log(keywords);
   client
-    .findPlaceFromText({
+    .textSearch({
       params: {
         key: process.env.GOOGLE_MAPS_API_KEY,
-        input: keywords,
-        inputtype: PlaceInputType.textQuery,
-        fields: [
-          "geometry",
-          "formatted_address",
-          "name",
-          "opening_hours",
-          "place_id",
-        ],
+        query: keywords,
+        // fields: ["geometry", "formatted_address", "name", "place_id"],
       },
       timeout: 1000, // milliseconds
     })
     .then((result) => {
-      const data = result.data.candidates.map((place) => ({
+      console.log(result.data.results);
+      const data = result.data.results.map((place) => ({
         formatted_address: place.formatted_address,
         location: place.geometry.location,
         name: place.name,
@@ -42,7 +37,8 @@ router.route("/:keywords").get((req, res) => {
       res.status(200).json({ status: "SUCCESS", data: data });
     })
     .catch((err) => {
-      res.status(200).json({ status: "FAIL", error: err });
+      console.log(err);
+      res.status(500).json({ status: "FAIL", error: err });
     });
 });
 
