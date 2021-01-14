@@ -1,0 +1,24 @@
+.Card {
+  position: relative;
+  z-index: 1000;
+  width: 200px;
+  transition: 0.5s;
+  visibility: hidden;
+  opacity: 0;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 5px 2px 2px black;
+  font-size: 0.5em;
+  text-align: center;
+  padding: 5px;
+}
+
+.Description {
+}
+
+.Marker:hover .Card {
+  visibility: visible;
+  opacity: 1;
+}
+.Marker:hover .Description {
+}

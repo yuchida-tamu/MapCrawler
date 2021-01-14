@@ -16,7 +16,7 @@ router.route("/").get((req, res) => {
  */
 router.route("/:keywords").get((req, res) => {
   const { keywords } = req.params;
-  console.log(keywords);
+
   client
     .textSearch({
       params: {
@@ -27,12 +27,13 @@ router.route("/:keywords").get((req, res) => {
       timeout: 1000, // milliseconds
     })
     .then((result) => {
-      console.log(result.data.results);
       const data = result.data.results.map((place) => ({
         formatted_address: place.formatted_address,
         location: place.geometry.location,
         name: place.name,
         place_id: place.place_id,
+        types: place.types,
+        icon: place.icon,
       }));
       res.status(200).json({ status: "SUCCESS", data: data });
     })

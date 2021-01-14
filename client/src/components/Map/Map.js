@@ -20,8 +20,14 @@ const Map = ({ places }) => {
   const [zoom, setZoom] = useState(15);
 
   //TODO: Create Marker Component
-  const markers = places.map((place) => (
-    <Marker lat={place.location.lat} lng={place.location.lng} />
+  const markers = places.map(({ location, name, icon, types }) => (
+    <Marker
+      lat={location.lat}
+      lng={location.lng}
+      name={name}
+      icon={icon}
+      types={types}
+    />
   ));
 
   return (

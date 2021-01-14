@@ -25,7 +25,7 @@ const PlaceFinder = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <div
         className="row"
         style={{ padding: "0", margin: "0", height: "10vh" }}

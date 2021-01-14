@@ -21,7 +21,7 @@ What you can do
    [x]Map Display (changes on real time)
    [x]Marker Component - icons...
    [x] List of places - cards
-   [] marker contains place info, hover to display the info
+   [x] marker contains place info, hover to display the info
    []Responsive to map movement (re fetch locations data with in the viewport)
    []Index of lists
    []Download json
