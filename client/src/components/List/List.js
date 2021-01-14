@@ -10,7 +10,24 @@ const List = ({ places }) => {
     />
   ));
 
-  return <ul>{items}</ul>;
+  return (
+    <div
+      className="col s3"
+      style={{ padding: "0", margin: "0", height: "100%" }}
+    >
+      <ul
+        className="　collection"
+        style={{
+          padding: "0",
+          margin: "0",
+          height: "100%",
+          overflow: "scroll",
+        }}
+      >
+        {items}
+      </ul>
+    </div>
+  );
 };
 
 export default List;

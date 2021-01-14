@@ -9,6 +9,7 @@
     "axios": "^0.21.1",
     "google-map-react": "^2.1.9",
     "http-proxy-middleware": "^1.0.6",
+    "materialize-css": "^1.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
@@ -37,5 +38,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "ember-cli-materialize": "^0.22.0"
   }
 }

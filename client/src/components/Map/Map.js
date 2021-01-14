@@ -25,7 +25,7 @@ const Map = ({ places }) => {
   ));
 
   return (
-    <div style={{ height: "100vh", width: "100%" }}>
+    <div className="col s9" style={{ height: "100%" }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: `${process.env.REACT_APP_GOOGLE_MAP_KEY}` }}
         defaultCenter={DEFAULT_CENTER}

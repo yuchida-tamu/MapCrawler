@@ -19,8 +19,10 @@ What you can do
    [x]init
    [x]Form
    [x]Map Display (changes on real time)
-   []Marker Component - icons...
-   [] List of places - cards
+   [x]Marker Component - icons...
+   [x] List of places - cards
+   [] marker contains place info, hover to display the info
+   []Responsive to map movement (re fetch locations data with in the viewport)
    []Index of lists
    []Download json
    []auth

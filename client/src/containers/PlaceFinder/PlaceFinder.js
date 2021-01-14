@@ -26,11 +26,19 @@ const PlaceFinder = () => {
 
   return (
     <div>
-      <h2>PlaceFinder</h2>
-
-      <Form click={onSubmitHandler} />
-      <List places={places} />
-      <Map places={places} />
+      <div
+        className="row"
+        style={{ padding: "0", margin: "0", height: "10vh" }}
+      >
+        <Form click={onSubmitHandler} />
+      </div>
+      <div
+        className="row"
+        style={{ padding: "0", margin: "0", height: "90vh" }}
+      >
+        <List places={places} />
+        <Map places={places} />
+      </div>
     </div>
   );
 };
