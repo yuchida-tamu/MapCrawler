@@ -14,16 +14,25 @@ router.route("/").get((req, res) => {
 /*
  * Search places by text
  */
-router.route("/:keywords").get((req, res) => {
-  const { keywords } = req.params;
+router.route("/text").get((req, res) => {
+  const { keywords, lat, lng } = req.query;
+  console.log(req);
+  const params =
+    lat && lng && lat !== undefined && lng !== undefined
+      ? {
+          key: process.env.GOOGLE_MAPS_API_KEY,
+          query: keywords,
+          location: { lat, lng },
+        }
+      : {
+          key: process.env.GOOGLE_MAPS_API_KEY,
+          query: keywords,
+        };
 
+  console.log("params", params);
   client
     .textSearch({
-      params: {
-        key: process.env.GOOGLE_MAPS_API_KEY,
-        query: keywords,
-        // fields: ["geometry", "formatted_address", "name", "place_id"],
-      },
+      params: params,
       timeout: 1000, // milliseconds
     })
     .then((result) => {

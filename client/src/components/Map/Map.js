@@ -7,7 +7,7 @@ const DEFAULT_CENTER = {
   lng: 30.33,
 };
 
-const Map = ({ places }) => {
+const Map = ({ places, onMapChange }) => {
   const [center, setCenter] = useState(DEFAULT_CENTER);
   /**
    * Update the center of the Map, everytime the place info is updated.
@@ -19,7 +19,7 @@ const Map = ({ places }) => {
 
   const [zoom, setZoom] = useState(15);
 
-  //TODO: Create Marker Component
+  //TODO: Move to container
   const markers = places.map(({ location, name, icon, types }) => (
     <Marker
       lat={location.lat}
@@ -37,6 +37,7 @@ const Map = ({ places }) => {
         defaultCenter={DEFAULT_CENTER}
         defaultZoom={zoom}
         center={center}
+        onDragEnd={(obj) => onMapChange(obj)}
       >
         {markers}
       </GoogleMapReact>
