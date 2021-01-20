@@ -16,7 +16,7 @@ router.route("/").get((req, res) => {
  */
 router.route("/text").get((req, res) => {
   const { keywords, lat, lng } = req.query;
-  console.log(req);
+
   const params =
     lat && lng && lat !== undefined && lng !== undefined
       ? {
@@ -29,7 +29,6 @@ router.route("/text").get((req, res) => {
           query: keywords,
         };
 
-  console.log("params", params);
   client
     .textSearch({
       params: params,

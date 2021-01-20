@@ -22,8 +22,10 @@ What you can do
    [x]Marker Component - icons...
    [x] List of places - cards
    [x] marker contains place info, hover to display the info
-   []Responsive to map movement (re fetch locations data with in the viewport)
-   []Index of lists
+   [x]Responsive to map movement (re fetch locations data with in the viewport)
+   [x]Index of lists
+   [x]Make Modal for lists
+   [x]Make Backdrop
    []Download json
    []auth
 6. Backend
