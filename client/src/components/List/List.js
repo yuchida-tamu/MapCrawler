@@ -1,10 +1,10 @@
 import React from "react";
 import Item from "./Item/Item";
 
-const List = ({ places, showMyList }) => {
-  const items = places.map((place) => (
-    <Item key={place.place_id} place={place} />
-  ));
+const List = ({ places, showMyList, isMyList }) => {
+  const items = places.map((place) => {
+    return <Item key={place.place_id} place={place} isAdded={isMyList} />;
+  });
 
   const listContainerStyle = showMyList ? "col" : "col s3";
 

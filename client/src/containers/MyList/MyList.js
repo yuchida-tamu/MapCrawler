@@ -31,7 +31,12 @@ const MyList = (props) => {
               <i className="material-icons white-text ">file_download</i>
             </a>
             <div className={listContainerStyle}>
-              <List places={context.placeList} showMyList={true} />
+              <List
+                places={context.placeList}
+                placeList={context.placeList}
+                showMyList={true}
+                isMyList={true}
+              />
             </div>
           </div>
         </div>

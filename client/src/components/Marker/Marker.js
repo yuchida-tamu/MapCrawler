@@ -1,8 +1,8 @@
 import React from "react";
 import classes from "./Marker.module.css";
 
-const Marker = ({ name, icon, types }) => {
-  const genre = types.map((type) => <p>{type}</p>);
+const Marker = ({ name, icon, types, place_id }) => {
+  const genre = types.map((type) => <p key={type + place_id}>{type}</p>);
 
   return (
     <div

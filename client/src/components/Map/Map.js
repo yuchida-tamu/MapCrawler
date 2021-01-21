@@ -20,13 +20,15 @@ const Map = ({ places, onMapChange }) => {
   const [zoom, setZoom] = useState(15);
 
   //TODO: Move to container
-  const markers = places.map(({ location, name, icon, types }) => (
+  const markers = places.map(({ location, name, icon, types, place_id }) => (
     <Marker
       lat={location.lat}
       lng={location.lng}
       name={name}
       icon={icon}
       types={types}
+      place_id={place_id}
+      key={place_id}
     />
   ));
 

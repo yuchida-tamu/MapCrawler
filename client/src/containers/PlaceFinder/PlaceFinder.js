@@ -35,7 +35,13 @@ const PlaceFinder = () => {
       })
       .then((result) => {
         const { status, data } = result.data;
-        if (status === "SUCCESS") setPlaces(data);
+        if (status === "SUCCESS") {
+          const formattedData = data.map((place) => ({
+            ...place,
+            isAdded: false,
+          }));
+          setPlaces(formattedData);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -52,11 +58,38 @@ const PlaceFinder = () => {
   };
 
   const addItemToListHandler = (place) => {
-    const updatedList = [place, ...placeList];
-    const filteredList = [...new Set(updatedList)];
-    setPlaceList(filteredList);
+    const modifiedPlace = { ...place, isAdded: true };
+    let updatedList = [];
+    if (placeList.length === 0) {
+      updatedList = [modifiedPlace];
+    } else {
+      const tempArr = placeList.filter((p) => p.place_id !== place.place_id);
+      updatedList = [modifiedPlace, ...tempArr];
+    }
 
-    console.log("list", placeList);
+    const updatedPlaces = updatePlaceInArray(places, modifiedPlace);
+
+    setPlaces(updatedPlaces);
+    setPlaceList(updatedList);
+  };
+
+  const removeItemHandler = (place) => {
+    const filteredList = placeList.filter((p) => p.place_id !== place.place_id);
+    const updatedPlaces = updatePlaceInArray(places, {
+      ...place,
+      isAdded: false,
+    });
+    setPlaceList(filteredList);
+    setPlaces(updatedPlaces);
+  };
+
+  const updatePlaceInArray = (arr, update) => {
+    return arr.map((p) => {
+      if (p.place_id === update.place_id) {
+        return update;
+      }
+      return p;
+    });
   };
 
   const onMapChangeHander = (obj) => {
@@ -89,6 +122,7 @@ const PlaceFinder = () => {
       <Context.Provider
         value={{
           addToList: addItemToListHandler,
+          removeFromList: removeItemHandler,
           placeList,
           href,
         }}
@@ -103,10 +137,10 @@ const PlaceFinder = () => {
           className="row"
           style={{ padding: "0", margin: "0", height: "90vh" }}
         >
-          <List places={places} />
+          <List places={places} placeList={placeList} isMyList={false} />
           <Map places={places} onMapChange={onMapChangeHander} />
         </div>
-        {showMyList ? <Backdrop /> : null}
+        {showMyList ? <Backdrop close={closeModalHandler} /> : null}
         {showMyList ? <MyList close={closeModalHandler} /> : null}
       </Context.Provider>
     </div>

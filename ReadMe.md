@@ -26,7 +26,9 @@ What you can do
    [x]Index of lists
    [x]Make Modal for lists
    [x]Make Backdrop
-   []Download json
+   [x]Download json
+   []change button display to "remove" when an item is added to the list
+   []shows the number of locations added
    []auth
 6. Backend
-   []figure out a way to return multiple possible places by keywords
+   [x]figure out a way to return multiple possible places by keywords
