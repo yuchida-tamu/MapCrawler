@@ -117,6 +117,16 @@ const PlaceFinder = () => {
       <div className="row">
         <div className="btn" onClick={toggleMyListHandler}>
           {showMyList ? "HIDE" : "My List"}
+          <span
+            className="badge white-text"
+            style={{
+              display: "inline-block",
+              padding: "5px 0 0 0",
+              width: "10%",
+            }}
+          >
+            {placeList.length}
+          </span>
         </div>
       </div>
       <Context.Provider
