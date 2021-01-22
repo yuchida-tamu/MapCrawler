@@ -23,7 +23,7 @@ router.route("/new").post(async (req, res) => {
   if (!isValid) return res.status(400).json({ status: "FAIL", msg: msg });
 
   const { body } = req;
-  const list = body.map(
+  const list = body.list.map(
     (place) =>
       new Place({
         formatted_address: place.formatted_address,
@@ -37,6 +37,7 @@ router.route("/new").post(async (req, res) => {
   try {
     const placeList = await new PlaceList({
       ownerID: "Dummy",
+      name: body.name,
       list: list,
     }).save();
 
@@ -126,7 +127,7 @@ const validateInputs = (req, isNew) => {
   if (!isNew && !mongoose.Types.ObjectId.isValid(id))
     result = { isValid: false, msg: "Invalid Id" };
 
-  body.forEach((place) => {
+  body.list.forEach((place) => {
     /* Validate necessary inputs are included */
     if (!place.place_id) {
       result = {

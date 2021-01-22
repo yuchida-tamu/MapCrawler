@@ -29,7 +29,10 @@ What you can do
    [x]Download json
    [x]change button display to "remove" when an item is added to the list
    [](buttons reset when map is dragged and places are refetched)
-   []shows the number of locations added
+   [x]shows the number of locations added
+   []Save list to db
+   []Landing page
+   []
    []auth
 6. Backend
    [x]figure out a way to return multiple possible places by keywords
