@@ -18,8 +18,8 @@ db.on("error", console.error.bind(console, "connection error:"));
 db.on("open", () => {
   console.log("DB connected!!!");
 });
-
-require("./data/googleMap");
+//Place and PlaceList model
+require("./data/place");
 
 /*
  * Google Map Client

@@ -10,10 +10,13 @@ const placeSchema = new mongoose.Schema({
   },
   name: String,
   place_id: { type: String, required: true },
+  icon: String,
+  types: [String],
 });
 
 const placeListSchema = new mongoose.Schema({
   ownerID: { type: String },
+  name: String,
   list: [placeSchema],
 });
 

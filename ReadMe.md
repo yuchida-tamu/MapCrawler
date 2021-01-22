@@ -27,7 +27,8 @@ What you can do
    [x]Make Modal for lists
    [x]Make Backdrop
    [x]Download json
-   []change button display to "remove" when an item is added to the list
+   [x]change button display to "remove" when an item is added to the list
+   [](buttons reset when map is dragged and places are refetched)
    []shows the number of locations added
    []auth
 6. Backend

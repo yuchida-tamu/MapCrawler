@@ -30,6 +30,8 @@ router.route("/new").post(async (req, res) => {
         location: place.location,
         name: place.name,
         place_id: place.place_id,
+        types: place.types,
+        icon: place.icon,
       })
   );
   try {
