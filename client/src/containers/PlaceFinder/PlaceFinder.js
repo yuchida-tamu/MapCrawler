@@ -24,6 +24,21 @@ const PlaceFinder = () => {
     fetchPlaces(keywords);
   };
 
+  const onSubmitToSaveHandler = (event) => {
+    event.preventDefault();
+    const name = event.target[0].value;
+    if (!name || name === "") return;
+    const data = { name, list: placeList };
+    axios
+      .post("/api/v1/list/new", data)
+      .then((result) => {
+        console.log(result.data.status);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const fetchPlaces = () => {
     axios
       .get(`/api/v1/search/text`, {
@@ -133,6 +148,7 @@ const PlaceFinder = () => {
         value={{
           addToList: addItemToListHandler,
           removeFromList: removeItemHandler,
+          saveList: onSubmitToSaveHandler,
           placeList,
           href,
         }}
@@ -141,7 +157,11 @@ const PlaceFinder = () => {
           className="row"
           style={{ padding: "0", margin: "0", height: "10vh" }}
         >
-          <Form click={onSubmitHandler} />
+          <Form
+            click={onSubmitHandler}
+            name={"search"}
+            placeholder={"search by keywords..."}
+          />
         </div>
         <div
           className="row"

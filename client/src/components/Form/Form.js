@@ -1,9 +1,9 @@
 import React from "react";
 
-const Form = (props) => {
+const Form = ({ click, name, placeholder }) => {
   return (
-    <form onSubmit={props.click}>
-      <input type="text" name="search" placeholder="search by keywords..." />
+    <form onSubmit={click}>
+      <input type="text" name={name} placeholder={placeholder} />
     </form>
   );
 };

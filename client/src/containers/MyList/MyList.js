@@ -2,6 +2,7 @@ import React from "react";
 import List from "../../components/List/List";
 import { Context } from "../../context/context";
 import classes from "./MyList.module.css";
+import Modal from "../../components/Modal/Modal";
 
 const MyList = (props) => {
   const styles = `row ${classes.MyList}`;
@@ -38,6 +39,7 @@ const MyList = (props) => {
                 isMyList={true}
               />
             </div>
+            <Modal name="savelist" placeholder="Save the list as..." />
           </div>
         </div>
       )}
