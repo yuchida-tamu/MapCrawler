@@ -24,7 +24,6 @@ const Modal = (props) => {
                 <form onSubmit={context.saveList}>
                   <input
                     type="text"
-                    click={context.saveList}
                     name={props.name}
                     placeholder={props.placeholder}
                   />

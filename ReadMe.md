@@ -30,7 +30,8 @@ What you can do
    [x]change button display to "remove" when an item is added to the list
    [](buttons reset when map is dragged and places are refetched)
    [x]shows the number of locations added
-   []Save list to db
+   [x]Save list to db
+   []Index of saved list
    []Landing page
    []
    []auth

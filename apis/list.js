@@ -17,6 +17,27 @@ const fs = require("fs");
 const Place = mongoose.model("Place");
 const PlaceList = mongoose.model("PlaceList");
 
+/*
+ * Fetch all lists
+ */
+
+router.route("/").get(async (req, res) => {
+  try {
+    const lists = await PlaceList.find({});
+    res.json({
+      status: "SUCCESS",
+      msg: "Successfully fetch all lists",
+      lists,
+    });
+  } catch (err) {
+    res.status(200).json({
+      status: "FAIL",
+      msg: "Fail to fetch lists",
+      error: err,
+    });
+  }
+});
+
 router.route("/new").post(async (req, res) => {
   /* input validation */
   const { isValid, msg } = validateInputs(req, true);
@@ -59,6 +80,7 @@ router.route("/new").post(async (req, res) => {
 
 router
   .route("/:id")
+
   .put(async (req, res) => {
     /* input validation */
     const { isValid, msg } = validateInputs(req, false);

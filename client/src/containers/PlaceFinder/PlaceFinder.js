@@ -128,7 +128,7 @@ const PlaceFinder = () => {
   };
 
   return (
-    <div>
+    <div style={{ paddingTop: "25px" }}>
       <div className="row">
         <div className="btn" onClick={toggleMyListHandler}>
           {showMyList ? "HIDE" : "My List"}
@@ -165,7 +165,7 @@ const PlaceFinder = () => {
         </div>
         <div
           className="row"
-          style={{ padding: "0", margin: "0", height: "90vh" }}
+          style={{ padding: "0", margin: "0", height: "80vh" }}
         >
           <List places={places} placeList={placeList} isMyList={false} />
           <Map places={places} onMapChange={onMapChangeHander} />
